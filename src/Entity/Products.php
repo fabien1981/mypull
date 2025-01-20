@@ -29,6 +29,10 @@ class Products
     #[ORM\Column]
     private ?bool $isValid = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Categories $category = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +94,18 @@ class Products
     public function setIsValid(bool $isValid): static
     {
         $this->isValid = $isValid;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Categories
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Categories $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }
