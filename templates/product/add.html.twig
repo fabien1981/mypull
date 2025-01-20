@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+<section class="p-5 flex flex-col">
+
+{% for message in app.flashes("message") %}
+<div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+  <span class="font-medium">Succés !</span> {{message}}
+</div>
+{% endfor %}
+
+{{ form_start(form, {"attr":{"class":"w-1/2 mx-auto"}}) }}
+<div class="mb-5">
+{{ form_widget(form.name) }}
+</div>
+<div class="mb-5">
+{{ form_widget(form.description) }}
+</div>
+<div class="flex flex-row mb-5">
+{{ form_widget(form.price) }}
+{{ form_widget(form.stock) }}
+</div>
+<div class="flex flex-row mb-5">
+{{ form_row(form.isValid) }}
+{{ form_widget(form.category) }}
+</div>
+{{ form_widget(form.envoyer) }}
+{{ form_end(form) }}
+</section>
+<section class="p-5 flex flex-col">
+
+{% for message in app.flashes("message") %}
+<div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+  <span class="font-medium">Succés !</span> {{message}}
+</div>
+{% endfor %}
+
+{{ form_start(formCategorie, {"attr":{"class":"w-1/2 mx-auto"}}) }}
+<div class="flex flex-row gap-5">
+{{ form_widget(formCategorie.name) }}
+{{ form_end(formCategorie) }}
+</div>
+</section>
+{% endblock %}
