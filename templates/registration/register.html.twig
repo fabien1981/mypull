@@ -7,7 +7,7 @@
 
     {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
+    {{ form_start(registrationForm, {"attr":{"class":"flex flex-col items-center"}}) }}
     <div class="flex flex-col md:flex-row mb-5">
         {{ form_widget(registrationForm.email) }}
         {{ form_widget(registrationForm.pseudo) }}
