@@ -26,7 +26,7 @@ final class ProductController extends AbstractController
             $entity->persist($product);
             $entity->flush();
             $this->addFlash("message", "Produit ajouté avec succés");
-            return $this->redirectToRoute("app_product");
+            return $this->redirectToRoute("app_productadd");
         }
 
         /**
@@ -38,13 +38,62 @@ final class ProductController extends AbstractController
         if($formCategorie->isSubmitted() && $formCategorie->isValid()){
             $entity->persist($category);
             $entity->flush();
-            $this->addFlash("message", "Catégorie ajoutée avec succés");
+            $this->addFlash("message", " ajouté avec succés");
             return $this->redirectToRoute('app_productadd');
         }
         return $this->render('product/add.html.twig', [
             'form' => $form->createView(),
             'formCategorie'=>$formCategorie,
         ]);
+    }
+
+    #[Route('/product/modif/{id}', name: 'app_productmodif')]
+    public function modif($id, Request $request, EntityManagerInterface $entity): Response
+    {
+        $product = $entity->getRepository(Products::class)->find($id);
+        $form = $this->createForm(ProductType::class, $product);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $entity->persist($product);
+            $entity->flush();
+            $this->addFlash("message", "Produit modifié avec succés");
+            return $this->redirectToRoute("app_productadd");
+        }
+
+        /**
+         * Formulaire pour catégories
+         */
+        $category = $entity->getRepository(Categories::class)->find($id);
+        $formCategorie = $this->createForm(CategoriesType::class, $category);
+        $formCategorie->handleRequest($request);
+        if($formCategorie->isSubmitted() && $formCategorie->isValid()){
+            $entity->persist($category);
+            $entity->flush();
+            $this->addFlash("message", " modifié avec succés");
+            return $this->redirectToRoute('app_productadd');
+        }
+        return $this->render('product/add.html.twig', [
+            'form' => $form->createView(),
+            'formCategorie'=>$formCategorie,
+        ]);
+    }
+
+    #[Route('/product/suppProduit/{id}', name: 'app_productsupp')]
+    public function supp($id, Request $request, EntityManagerInterface $entity): Response
+    {
+        $product = $entity->getRepository(Products::class)->find($id);
+        $entity->remove($product);
+        $entity->flush();
+        return $this->redirectToRoute('app_product');
+    }
+    #[Route('/product/suppCategories/{id}', name: 'app_Categorysupp')]
+    public function suppCat($id, Request $request, EntityManagerInterface $entity): Response
+    {
+        $category = $entity->getRepository(Categories::class)->find($id);
+        $entity->remove($category);
+        $entity->flush();
+        return $this->redirectToRoute('app_product');
     }
 
     #[Route('/product', name: 'app_product')]
