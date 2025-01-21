@@ -33,6 +33,9 @@ class Products
     #[ORM\JoinColumn(nullable: false)]
     private ?Categories $category = null;
 
+    #[ORM\Column(length: 100)]
+    private ?string $slug = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +109,18 @@ class Products
     public function setCategory(?Categories $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }
