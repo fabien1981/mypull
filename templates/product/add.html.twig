@@ -24,6 +24,10 @@
 </span>
 {{ form_widget(form.stock) }}
 </div>
+<div class="mb-5">
+        <label for="image" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Photo du produit</label>
+        {{ form_widget(form.image) }}
+    </div>
 <div class="flex flex-row mb-5">
 {{ form_row(form.isValid) }}
 {{ form_widget(form.category) }}

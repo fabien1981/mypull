@@ -13,7 +13,7 @@
     </a>
     <div class="p-5">
         <a href="{{path('app_product' , {slug:category.slug})}}">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{category.name}}</h5>
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-red-900 dark:text-white">{{category.name}}</h5>
             
         </a>
         {% if  is_granted('ROLE_ADMIN')  %}
