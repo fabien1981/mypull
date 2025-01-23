@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType as TypeTextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class ProductType extends AbstractType
 {
@@ -30,10 +31,18 @@ class ProductType extends AbstractType
             ])
             ->add('stock', NumberType::class,[
                 "attr"=>["placeholder"=>"Stock du produit", "class"=>"w-full"]
+            
+            ])
+            ->add('image', FileType::class, [
+                'label' => 'Photo du produit',
+                'mapped' => false, // Indique que ce champ n'est pas mappé à l'entité
+                'required' => false,
+                'attr' => ["class" => "w-full"],
             ])
             ->add('isValid',CheckboxType::class,[
                 'label'=>"Est valide ?"
             ])
+            
             ->add('envoyer', SubmitType::class, [
                 "attr"=>["class"=>"text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"]
             ])
